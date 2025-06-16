@@ -1,137 +1,138 @@
-<!-- Fall Christmas Utility - Adam Seidman -->
-<!doctype html><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>FC Utility</title><link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css rel=stylesheet>
-    <link href="./styles.css" rel=stylesheet>
-    <div class=header>Fall Christmas Video Utility</div>
-    <div class="container table-container">
-        <table class="table table-bordered"id=table>
-            <thead><tr><th>Name<th>Email<th>Can't Have<th>Actions<tbody>
-                <tfoot><tr class=bottom-row><td colspan=4><button class="btn btn-secondary"id=addRow onclick=clAR()>Clear Rows</button> 
-                    <button class="btn btn-secondary"id=addRow onclick=showaRM()>Add Row</button></table><div class=btn-container><div class=status-container>
-                        <button class="btn btn-dark"id=checkValidity>Check if Solvable</button> <span id=statL class="status-led unchecked"></span></div>
-                        <button class="btn btn-dark"id=gE onclick=gE() disabled>Give Example Output</button> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fall Christmas Utility</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="header">Fall Christmas Video Utility</div>
 
-                        <span>
-                        <button class="btn btn-dark"id=calculateBtn onclick="calculate()" disabled>Calculate</button>&nbsp;
-                        <input type="checkbox" id="calcHideCheck" name="calcHideCheck" checked>
-                        <label for="calcHideCheck">Hide Results</label>
-                        <!-- TODO auto set hide results back to checked -->
-                            </span>
-                    </div></div>
-                        <br><br>
-                        <div class="fade modal"aria-hidden=true aria-labelledby=aRMLabel id=aRM tabindex=-1><div class=modal-dialog><div class=modal-content><div class=modal-header><h5 class=modal-title id=aRMLabel>Add Row</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div><div class=modal-body><div class=mb-3><label for=addName class=form-label>Name</label> <input class=form-control id=addName oninput=validateAddRow()></div><div class=mb-3><label for=addEmail class=form-label>Email</label> <input class=form-control id=addEmail oninput=validateAddRow() onkeypress="return kyWr(event,addRowFromModal)"type=email></div></div><div class=modal-footer><button class="btn btn-primary"type=button id=aRBt onclick=addRowFromModal() disabled>Add Row</button> <button class="btn btn-secondary"type=button data-bs-dismiss=modal>Close</button></div></div></div></div>
-                        <div class="fade modal"aria-hidden=true aria-labelledby=exMLabel id=exM tabindex=-1><div class=modal-dialog><div class=modal-content><div class=modal-header><h5 class=modal-title id=exMLabel>Set Exclusions (<span id=exclusionNameText></span>)</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div><div class=modal-body><label for=selectExclusions>Choose exclusions</label> <select class=form-control id=selectExclusions multiple></select></div><div class=modal-footer><button class="btn btn-primary"type=button id=adEXsBtn onclick=adEXs()>Set Exclusions</button> <button class="btn btn-secondary"type=button data-bs-dismiss=modal>Close</button></div></div></div></div>
-                        <div class="fade modal"aria-hidden=true aria-labelledby=edMLabel id=edM tabindex=-1><div class=modal-dialog><div class=modal-content><div class=modal-header><h5 class=modal-title id=edMLabel>Possible Ordering</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div><div class=modal-body><p>example</div><div class=modal-footer><button class="btn btn-primary"type=button id=refEsBtn onclick=refE()>Refresh</button> <button class="btn btn-secondary"type=button data-bs-dismiss=modal>Close</button></div></div></div></div>
-                        
-                        <div class="fade modal" aria-hidden=true aria-labelledby=calcRsltsLabel id=rsltsM tabindex=-1>
-                            <div class=modal-dialog>
-                                <div class=modal-content>
-                                    <div class=modal-header>
-                                        <h5 class=modal-title id=calcRsltsLabel>Calculated Results</h5>
-                                        <button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button>
-                                    </div>
-                                    <div class=modal-body>
-                                        <p>example</p>
-                                    </div>
-                                    <div class=modal-footer>
-                                        <button class="btn btn-primary hide" type=button id=calcRefreshBtn onclick="calculate(true)" disabled>Refresh</button> 
-                                        <button class="btn btn-primary" type=button id=calcSubmitBtn onclick="submitCalculated()" disabled>Submit</button> 
-                                        <button class="btn btn-secondary"type=button data-bs-dismiss=modal>Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <div class="container table-container">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Can't Have</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr class="bottom-row">
+          <td colspan="3">
+            <button class="btn btn-secondary" id="addRow" onclick="clearAllRows()">Clear Rows</button>
+            <button class="btn btn-secondary" id="addRow" onclick="showAddRowModal()">Add Row</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
 
-                        <script src=https://code.jquery.com/jquery-3.6.0.min.js></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js></script>
-    <script>
+    <div class="btn-container">
+      <div class="status-container">
+        <button class="btn btn-dark" id="checkValidity">Check if Solvable</button>
+        <span id="statusLed" class="status-led unchecked"></span>
+      </div>
+      <button class="btn btn-dark" id="giveExampleAction" onclick="onNewBtnPress()" disabled>Calculate</button>
+      
+      <br>
+      <!-- <br> -->
+        <!-- onclick="giveExampleAction()"  Give Example Output</button> -->
 
+      <!-- <span>
+        <button class="btn btn-dark" id="calculateBtn" onclick="calculate()" disabled>Calculate</button>
+        <input type="checkbox" id="calcHideCheck" name="calcHideCheck" checked>
+        <label for="calcHideCheck">Hide Results</label>
+      </span> -->
+    </div>
+  </div>
 
+  <!-- Add Row Modal -->
+  <div class="modal fade" id="addRowModal" tabindex="-1" aria-hidden="true" aria-labelledby="addRowModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addRowModalLabel">Add Row</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="addName" class="form-label">Name</label>
+            <input class="form-control" id="addName" oninput="validateAddRow()" autocomplete="off" aria-autocomplete="none" onkeypress="return keyWrapper(event, addRowFromModal)">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" id="addRowButton" onclick="addRowFromModal()" disabled>Add Row</button>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        const table=$("#table tbody"),statL=$("#statL"),buttons={checkValidity:$("#checkValidity"),gE:$("#gE"),calculateBtn:$("#calculateBtn")};let allRows=[];function svAR(){localStorage.setItem("allRows",JSON.stringify(allRows))}$(document).ready(()=>{let e=localStorage.getItem("allRows")||"[]";try{allRows=JSON.parse(e)}catch(a){allRows=[]}allRows.forEach(({name:e,email:a})=>{let t=$(`<tr data-name="${e}">`);t.append(` 
-        <td>${e}</td>
-        <td>${a}</td>
-        <td></td>
-        <td>
-            <button class="btn btn-sm btn-secondary" onclick="a_eE('${e}')"><i class="fas fa-edit"></i></button>
-            <button class="btn btn-sm btn-secondary" onclick="dR('${e}')"><i class="fas fa-trash-alt"></i></button>
-        </td>
-    `),table.append(t),t.addClass("p-r")}),uTE()});const eRg=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;function kyWr(e,a){return 13!=e.keyCode||(a(),!1)}function setOBE(e){buttons.calculateBtn.attr("disabled",!e),buttons.gE.attr("disabled",!e)}function validateAddRow(){let e=$("#addName").val(),a=$("#addEmail").val(),t=e.length>1&&eRg.test(a);$("#aRBt").prop("disabled",!t)}function showaRM(){$("#addName").val(""),$("#addEmail").val(""),$("#aRBt").prop("disabled",!0),$("#aRM").modal("show")}function addRowFromModal(){let e=$("#addName").val(),a=$("#addEmail").val(),t=$(`<tr data-name="${e}">`);t.append(` 
-    <td>${e}</td>
-    <td>${a}</td>
-    <td></td>
-    <td>
-        <button class="btn btn-sm btn-secondary" onclick="a_eE('${e}')"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-sm btn-secondary" onclick="dR('${e}')"><i class="fas fa-trash-alt"></i></button>
-    </td>
-    `),table.append(t),t.addClass("p-r"),allRows.push({name:e,email:a,exclusions:[]}),$("#aRM").modal("hide"),rstL(),svAR()}function dR(e){let a=$(`#table tbody tr[data-name="${e}"]`);if(1!==a.length){alert("Internal Error in dR! "+e);return}if(confirm(`Are you sure you want to delete entry for "${e}"?`)){a.remove();let t=allRows.find(a=>a.name===e).name;allRows=allRows.filter(a=>a.name!==e);for(let l=0;l<allRows.length;l++)allRows[l].exclusions=allRows[l].exclusions.filter(e=>e!==t);uTE(),svAR()}rstL()}function clAR(){confirm("Are you sure you want to clear all table rows?")&&(localStorage.removeItem("allRows"),setTimeout(()=>{window.location.reload()},50))}function a_eE(e){let a=$(`#table tbody tr[data-name="${e}"]`),t=allRows.find(a=>a.name===e);if(1!==a.length||void 0===t){alert("Internal Error in a_eE! "+e);return}$("span#exclusionNameText").text(e),$("#selectExclusions").html(`
-    ${allRows.filter(a=>a.name!==e).map(e=>`
-            <option value="${e.name}" ${t.exclusions.includes(e.name)?" selected":""}>
-                ${e.name}
-            </option>
-        `).join("")}
-    `),$("#exM").modal("show")}function uTE(){allRows.forEach(e=>{let a=$(`#table tbody tr[data-name="${e.name}"]`);if(1!==a.length){console.error("Error: uTE!",e,a.length);return}a.find("td").eq(2).text(e.exclusions.join(", "))})}function adEXs(){let e=$("span#exclusionNameText").text()||"___",a=allRows.find(a=>a.name===e),t=$(`#table tbody tr[data-name="${e}"]`);if(void 0===a||1!==t.length){alert("Internal Error in adEXs! "+e);return}let l=$("#selectExclusions").val()||[];a.exclusions=l,uTE(),$("#exM").modal("hide"),svAR()}function refE(){let e=gEx();Array.isArray(e)||(e=[]),$("#edM div.modal-body").html(`
-    <p>${e.map((a,t)=>t===e.length-1?`${a} has ${e[0]}`:`${a} has ${e[t+1]}`).join("</p><p>")}
-    </p>
-    `)}function gE(){tIV()?($("#edM").modal("show"),refE()):($("#edM").modal("hide"),alert("Could not open examples!"))}function rstL(){setOBE(!1),statL.removeClass("pass fail").addClass("unchecked")}function calculateAndEmail(){rstL(),alert("TODO: Implement this!")}function getEOpts(){let e={base:{}};return allRows.forEach(a=>{e.base[a.name]=[],(a.exclusions||[]).forEach(t=>{e.base[a.name].push(t)})}),["best","host","highest"].forEach(a=>{e[a]=JSON.parse(JSON.stringify(e.base))}),new Promise((a,t)=>{fetch("https://api.adamseidman.com/api/fallchristmas/exclusions").then(e=>e.json()).then(({mapping:t,highest:l,exclusions:s})=>{let n={};allRows.forEach(e=>{let a=Object.keys(t).find(a=>{var l,s,n;return l=e.name,s=a,n=t[a],l=l.trim().toLowerCase(),(n=JSON.parse(JSON.stringify(n.map(e=>e.trim().toLowerCase())))).push(s.trim().toLowerCase()),!!n.find(e=>l.includes(e))});a&&(n[e.name]=a)});let o={};Object.entries(n).forEach(([e,a])=>{o[e]=[];s[a].forEach(a=>{let t=Object.entries(n).find(([e,t])=>t===a);Array.isArray(t)&&2===t.length&&(t=t[0],o[e].includes(t)||o[e].push(t))})}),allRows.filter(e=>void 0!==n[e.name]).forEach(a=>{let t=n[a.name],i=["best"];t===l?(i.push("highest"),i.push("host")):s[t].includes(l)&&i.push("host"),i.forEach(t=>{o[a.name].forEach(l=>{e[t][a.name].includes(l)||e[t][a.name].push(l)})})}),a(e)}).catch(t=>{console.warn(t),a(e)})})}function isOBE(e,a={}){if(Object.keys(a).length<1&&allRows.forEach(e=>{a[e.name]=[],e.exclusions.forEach(t=>{a[e.name].push(t)})}),a[e[e.length-1]].includes(e[0]))return!0;for(let t=0;t<e.length-1;t++)if(a[e[t]].includes(e[t+1]))return!0;return!1}function gEx(){if(!tIV())return[];let e=allRows.map(e=>e.name);for(let a=0;a<5;a++)u_sA(e);for(;isOBE(e);)u_sA(e);return e}
-    async function getFullResults(useStrict){if(!tIV())return[];let e=allRows.map(e=>e.name);for(let a=0;a<5;a++)u_sA(e);let t=await getEOpts();
-    let prob = 0.48;function l(a){prob += 0.15;if (useStrict && (Math.random() > prob)){return false;} let l=0;for(;l<=5e3;)if(u_sA(e),!isOBE(e,t[a])){l-=1;break}return l<5e3}
-    return(allRows.forEach(e=>{void 0===t.base[e.name]&&Object.keys(t).forEach(a=>{t[a][e.name]=[]})}),l("best")||l("host"))?e:l("highest")?e:gEx()}function u_sA(e){if(!Array.isArray(e)||e.length<2)return e;for(let a=e.length-1;a>0;a--){let t=Math.floor(Math.random()*(a+1));[e[a],e[t]]=[e[t],e[a]]}return e}function tIV(){if(!Array.isArray(allRows))return alert("Internal error in tIV! "+typeof allRows),!1;let e=allRows.map(e=>e.name),a=0;for(;a<=1e6;){if(!isOBE(e))return!0;u_sA(e),a+=1}return!1}
-    buttons.checkValidity.click(function(){let e=tIV();statL.removeClass("unchecked"),statL.toggleClass("fail",!e),statL.toggleClass("pass",e),setOBE(e)}); /* TODO, answer is no if less than 2 rows */
+  <!-- Exclusion Modal -->
+  <div class="modal fade" id="exM" tabindex="-1" aria-hidden="true" aria-labelledby="exclusionModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exclusionModalLabel">Set Exclusions (<span id="exclusionNameText"></span>)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="selectExclusions">Choose exclusions</label>
+          <select class="form-control" id="selectExclusions" multiple></select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" id="addExclusionsBtn" onclick="addExclusions()">Set Exclusions</button>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    let results = []
+  <!-- Example Output Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true" aria-labelledby="editModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Possible Ordering</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>example</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" id="refreshExamplesBtn" onclick="refreshExample()">Refresh</button>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    function calculate(skipHide) {
-        if (!skipHide) {
-            $('#rsltsM').modal('hide')
-        }
-        $('#calcSubmitBtn').attr('disabled', true)
-        $('#calcRefreshBtn').attr('disabled', true)
-        const stayHidden = $('input#calcHideCheck').is(':checked');
-        const modalBody = $('#rsltsM .modal-body');
-        modalBody.html('<i>(Pending Results)</i>')
-        $('#calcRefreshBtn').toggleClass('hide', stayHidden)
-        getFullResults(!stayHidden) // TODO add "isStrict" parameter
-            .then((rslts) => {
-                results = JSON.parse(JSON.stringify(rslts))
-                if (stayHidden) {
-                    modalBody.html('Found Successful Results!');
-                } else {
-                    modalBody.html(`
-                        <p>
-                            ${rslts
-                                .map((name, i) => {
-                                    if (i === (rslts.length - 1)) {
-                                        return `${name} has ${rslts[0]}`
-                                    } else {
-                                        return `${name} has ${rslts[i + 1]}`
-                                    }
-                                })
-                                .join('</p><p>')
-                            }
-                        </p>
-                    `);
-                    $('#calcRefreshBtn').attr('disabled', false);
-                }
-                $('#calcSubmitBtn').attr('disabled', false);
-            })
-            .catch((err) => {
-                console.error(err)
-                modalBody.html('Error :(')
-                alert('Error showing results!')
-            })
-        $('#rsltsM').modal('show');
-    }
+  <!-- Results Modal -->
+  <div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true" aria-labelledby="calcRsltsLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="calcRsltsLabel">Calculated Results</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>example</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary hide" type="button" id="calcRefreshBtn" onclick="calculate(true)" disabled>Refresh</button>
+          <button class="btn btn-primary" type="button" id="calcSubmitBtn" onclick="submitCalculated()" disabled>Submit</button>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    function submitCalculated() {
-        if (!confirm('Are you sure you would like to submit?')) {
-            return
-        }
-        $('#rsltsM').modal('hide');
-        if (!Array.isArray(results) || results.length !== allRows.length) {
-            alert('Parse Error! ' + results.length);
-            return;
-        }
-        console.log('Submit Candidate', results);
-        alert('TODO: Implement Submission');
-    }
-</script></html>
-    
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

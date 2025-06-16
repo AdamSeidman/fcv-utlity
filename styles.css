@@ -1,5 +1,89 @@
 /* fc styles - Adam Seidman */
-.btn-container,.table-container{margin-top:30px}.bottom-row,.header{text-align:center}body{font-family:Arial,sans-serif;background-color:#f0f2f5;margin:0;padding:0}.header{background-color:#343a40;color:#fff;padding:15px;font-size:2em;box-shadow:0 4px 6px rgba(0,0,0,.1)}.status-led{height:20px;width:20px;display:inline-block;border-radius:50%;margin-left:10px}.status-led.unchecked{background-color:#6c757d}.status-led.pass{background-color:#28a745}.status-led.fail{background-color:#dc3545}.btn-container{display:flex;flex-direction:column;gap:15px;justify-content:center;align-items:center}.table td,.table th{text-align:center;vertical-align:middle}.table td i{font-size:1.2em;cursor:pointer}.modal-content{background-color:#fff;border-radius:8px;padding:20px}.modal-footer{border-top:1px solid #e9ecef}.btn:disabled,.btn[disabled]{background-color:#6c757d;color:#fff;cursor:not-allowed}.hide{display:none!important}
+.btn-container,
+.table-container {
+    margin-top: 30px;
+}
+
+.bottom-row,
+.header {
+    text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 15px;
+    font-size: 2em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status-led {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.status-led.unchecked {
+    background-color: #6c757d;
+}
+
+.status-led.pass {
+    background-color: #28a745;
+}
+
+.status-led.fail{
+    background-color: #dc3545;
+}
+
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.table td,
+.table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table td i {
+    font-size: 1.2em;
+    cursor:pointer;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    background-color: #6c757d;
+    color: #fff;
+    cursor:not-allowed;
+}
+
+.hide {
+    display: none !important;
+}
+
 select#selectExclusions {
     min-height: 250px;
 }
